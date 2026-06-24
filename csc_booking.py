@@ -1,3 +1,5 @@
+import os
+import sys
 import time
 from datetime import datetime
 
@@ -14,14 +16,15 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 
 class CSC:
     def __init__(self):
-        with open("top_secret.txt") as f:
+        with open("top_secret.txt", encoding="utf-8-sig") as f:
             self.username = f.readline().strip()
             self.password = f.readline().strip()
-            driver = f.readline().strip()
         chrome_options = Options()
         chrome_options.add_argument("--incognito")
         chrome_options.add_experimental_option("detach", True)
-        self.browser = webdriver.Chrome(service=Service(driver), options=chrome_options)
+        base = getattr(sys, "_MEIPASS", os.path.dirname(__file__))
+        driver_path = os.path.join(base, "chromedriver.exe")
+        self.browser = webdriver.Chrome(service=Service(driver_path), options=chrome_options)
         self.browser.get("https://gateway.csc.sg/webclub/facilities/")
 
     def _login(self, user, password):

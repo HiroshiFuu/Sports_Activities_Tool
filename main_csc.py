@@ -17,4 +17,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python -m PyInstaller --name "CSC Booking" -F "D:\\AAA\\Sports_Activities_Tool\\main_csc.py"
+# pyinstaller --log-level INFO --add-binary "D:\\Tools\\chromedriver.exe;." --hidden-import=csc_booking --hidden-import=selenium.webdriver.chrome.webdriver --onefile main_csc.py -n "CSC_Booking_"
